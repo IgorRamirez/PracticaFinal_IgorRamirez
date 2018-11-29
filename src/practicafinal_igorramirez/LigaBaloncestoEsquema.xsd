@@ -1,0 +1,26 @@
+<?xml version="1.0"?>
+<xsd:schema xmlns:xsd="http://www.w3.org/2001/XMLSchema" version="1.0">
+	<xsd:element name="LigaBaloncesto">
+		<xsd:complexType>
+			<xsd:choice maxOccurs="unbounded">
+				<xsd:element name="equipo" minOccurs="0" maxOccurs="unbounded">
+					<xsd:complexType>
+						<xsd:sequence>
+							<xsd:element name="presidente" type="xsd:string" />
+							<xsd:element name="capitan" type="xsd:string" />
+							<xsd:element name="estadio" type="xsd:string" />
+							<xsd:element name="colores" type="xsd:string" />
+							<xsd:element name="part_ganados" type="xsd:string" />
+							<xsd:element name="part_perdidos" type="xsd:string" />
+							<xsd:element name="puntos_a_favor" type="xsd:string" />
+							<xsd:element name="puntos_en_contra" type="xsd:string" />
+						</xsd:sequence>
+						<xsd:attribute name="id_equipo" type="xsd:string"/>
+						<xsd:attribute name="nombre" type="xsd:string"/>
+						<xsd:attribute name="puesto" type="xsd:string"/>
+					</xsd:complexType>
+				</xsd:element>
+			</xsd:choice>
+		</xsd:complexType>
+	</xsd:element>
+</xsd:schema>

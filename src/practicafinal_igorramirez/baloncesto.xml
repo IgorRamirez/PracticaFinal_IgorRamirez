@@ -1,0 +1,24 @@
+<LigaBaloncesto xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="LigaBaloncestoEsquema.xsd">
+	
+	<equipo id_equipo="01" nombre="Real Madrid" puesto="01">	
+			<presidente>Florentino Pérez</presidente>
+			<capitan>Felipe Reyes</capitan>
+			<estadio>Wizink Center</estadio>
+			<colores>Blanco-Morado</colores>
+			<part_ganados>30</part_ganados>
+			<part_perdidos>4</part_perdidos>
+			<puntos_a_favor>3052</puntos_a_favor>
+			<puntos_en_contra>2678</puntos_en_contra> 
+	</equipo>
+	
+	<equipo id_equipo="02" nombre="San Pablo Burgos" puesto="14">	
+			<presidente>Felix Sancho</presidente>
+			<capitan>Bruno Fitipaldo</capitan>
+			<estadio>Coliseum Burgos</estadio>
+			<colores>Azul-Blanco</colores>
+			<part_ganados>13</part_ganados>
+			<part_perdidos>21</part_perdidos>
+			<puntos_a_favor>2775</puntos_a_favor>
+			<puntos_en_contra>2961</puntos_en_contra>	
+	</equipo>
+</LigaBaloncesto>
