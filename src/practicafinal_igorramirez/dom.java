@@ -11,7 +11,7 @@ import java.io.File;
 import java.io.FileOutputStream;
 import javax.xml.parsers.DocumentBuilder;
 import javax.xml.parsers.DocumentBuilderFactory;
-import org.w3c.dom.Document;
+import org.w3c.dom.  Document;
 import org.w3c.dom.Element;
 import org.w3c.dom.Node;
 import org.w3c.dom.NodeList;
@@ -48,30 +48,38 @@ public class dom {
 
         Node raiz = doc.getFirstChild();                                        //obtiene el primer nodo del DOM(primer hijo)
         NodeList nodelist = raiz.getChildNodes();                               //obtiene una lista de nodos con todos los nodos hjo del raiz
+        
         for (int i = 0; i < nodelist.getLength(); i++) {                        //Procesa los nodos hijo
             node = nodelist.item(i);
 
             if (node.getNodeType() == Node.ELEMENT_NODE) {
-                datos_nodo = procesarLibro(node);                               //Es un nodo libro
-                salida = salida + "\n" + "Publicado en:" + datos_nodo[0];
-                salida = salida + "\n" + "El autor es:" + datos_nodo[2];
-                salida = salida + "\n" + "El titulo es:" + datos_nodo[1];
-                salida = salida + "\n-----------";
+                datos_nodo = procesarEquipo(node);                               //Es un nodo libro
+               
             }
         }
         return salida;
 
     }
 
-    protected String[] procesarLibro(Node n) {
+    protected String[] procesarEquipo(Node n) {
         String datos[] = new String[3];
         Node ntemp = null;
-        int contador = 1;
+        int contador = 8;
 
-        datos[0] = n.getAttributes().item(0).getNodeValue();                    //obtiene el valor del primer atributo del nodo(uno en este ejempo)
+        datos[0] = n.getAttributes().item(0).getNodeValue();  
+        datos[1] = n.getAttributes().item(0).getNodeValue();   
+        datos[2] = n.getAttributes().item(0).getNodeValue();   
+        datos[3] = n.getAttributes().item(0).getNodeValue();   
+        datos[4] = n.getAttributes().item(0).getNodeValue();   
+        datos[5] = n.getAttributes().item(0).getNodeValue();   
+        datos[6] = n.getAttributes().item(0).getNodeValue();  
+        datos[7] = n.getAttributes().item(0).getNodeValue(); 
+        datos[8] = n.getAttributes().item(0).getNodeValue(); 
+        //obtiene el valor del primer atributo del nodo(uno en este ejempo)
         NodeList nodos = n.getChildNodes();                                     //obtiene los hijos del libro (titulo y autor) 
 
-        for (int i = 0; i < nodos.getLength(); i++) {
+        for (int i = 8; i < nodos.getLength(); i++) {
+            
             ntemp = nodos.item(i);
 
             if (ntemp.getNodeType() == Node.ELEMENT_NODE) {
@@ -81,9 +89,29 @@ public class dom {
         }
         return datos;
     }
+    
+    public int guardarDOM(File fichero) {
+
+        //Document doc = null;
+        try {
+
+            OutputFormat format = new OutputFormat(doc);
+            format.setIndenting(true);
+
+            XMLSerializer serializer = new XMLSerializer(new FileOutputStream(fichero), format);
+
+            serializer.serialize(doc);
+            return 0;
+
+        } catch (Exception e) {
+            return -1;
+        }
+    }
+
 
     public int annadirDOM(Document doc, String equipo, String capitan,
-            String estadio, String colores, String part_ganados, String part_perdidos ) {
+            String estadio, String colores, String part_ganados,
+            String part_perdidos, String puntos_a_favor, String puntos_en_contra ) {
         try {
             Node npresidente = doc.createElement("presidente");                         //Se crea un nodo tipo element con nombre 'titulo'(<Titulo>)
             Node npresidente_text = doc.createTextNode(equipo);                     //Se crea un nodo tipo texto con el titulo del libro
@@ -123,33 +151,22 @@ public class dom {
             ((Element) nequipo).setAttribute("puesto", equipo); //Al nuevo nodo libro se le añade un atributo publicado_en
            
             
-            nlibro.appendChild(ntitulo);                                        //Se añade a libro el nodo autor y titulo creados antes
-            nlibro.appendChild(nautor);
+            nequipo.appendChild(nequipo);   
+            nequipo.appendChild(nequipo); 
+
+
+//Se añade a libro el nodo autor y titulo creados antes
+            
 
             Node raiz = doc.getChildNodes().item(0);                            //Se obtiene el primer nodo del documento y a el se le añade como hijo el nodo libro que ya tiene colgando todos sus hijos y atributos creados antes
-            raiz.appendChild(nlibro);
+            raiz.appendChild(nequipo);
 
-            return 0;
+            return 0; 
         } catch (Exception e) {
             e.printStackTrace();
             return -1;
         }
     }
 
-    public int guardarDOMcomoFILE() {
-        try {
-            File archivo_xml = new File("salida.xml");                          //Crea un fichero llamado salida.xml
-            OutputFormat format = new OutputFormat(doc);                        //Especifica el formato de salida
-            format.setIndenting(true);                                          //Especifica que la salida este  indentada
-            XMLSerializer serializer = new XMLSerializer(new FileOutputStream //Escribe el contenido e el file    
-                    (archivo_xml), format);
-
-            serializer.serialize(doc);
-
-            return 0;
-        } catch (Exception e) {
-            return -1;
-        }
-
-    }
+    
 }
